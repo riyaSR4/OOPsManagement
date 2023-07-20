@@ -79,6 +79,95 @@ namespace OOPsManagement.InventoryManagement
             if (details == null)
                 Console.WriteLine("No inventory details exist");
         }
+        public void EditInventoryManagement(string objectName, string inventoryName)
+        {
+            InventoryDetails details = new InventoryDetails();
+            if (objectName.ToLower().Equals("rice"))
+            {
+                foreach (var data in list.RiceList)
+                {
+                    if (data.Name.Equals(inventoryName))
+                        details = data;
+                }
+                if (details != null)
+                {
+                    Console.WriteLine("Enter the option to edit\n 1.Name 2.Weight 3.PricePerKg");
+                    int option = Convert.ToInt32(Console.ReadLine());
+                    switch (option)
+                    {
+                        case 1:
+                            Console.WriteLine("Enter Name");
+                            details.Name = Console.ReadLine();
+                            break;
+                        case 2:
+                            Console.WriteLine("Enter Weight");
+                            details.Weight = Convert.ToInt32(Console.ReadLine());
+                            break;
+                        case 3:
+                            Console.WriteLine("Enter PricePerKg");
+                            details.PricePerKg = Convert.ToInt32(Console.ReadLine());
+                            break;
+                    }
+                }
+
+            }
+            if (objectName.ToLower().Equals("wheat"))
+            {
+                foreach (var data in list.WheatList)
+                {
+                    if (data.Name.Equals(inventoryName))
+                        details = data;
+                }
+                if (details != null)
+                {
+                    Console.WriteLine("Enter the option to edit\n 1.Name 2.Weight 3.PricePerKg");
+                    int option = Convert.ToInt32(Console.ReadLine());
+                    switch (option)
+                    {
+                        case 1:
+                            Console.WriteLine("Enter Name");
+                            details.Name = Console.ReadLine();
+                            break;
+                        case 2:
+                            Console.WriteLine("Enter Weight");
+                            details.Weight = Convert.ToInt32(Console.ReadLine());
+                            break;
+                        case 3:
+                            Console.WriteLine("Enter PricePerKg");
+                            details.PricePerKg = Convert.ToInt32(Console.ReadLine());
+                            break;
+                    }
+                }
+            }
+            if (objectName.ToLower().Equals("pulses"))
+            {
+                foreach (var data in list.PulsesList)
+                {
+                    if (data.Name.Equals(inventoryName))
+                        details = data;
+                }
+                if (details != null)
+                {
+                    Console.WriteLine("Enter the option to edit\n 1.Name 2.Weight 3.PricePerKg");
+                    int option = Convert.ToInt32(Console.ReadLine());
+                    switch (option)
+                    {
+                        case 1:
+                            Console.WriteLine("Enter Name");
+                            details.Name = Console.ReadLine();
+                            break;
+                        case 2:
+                            Console.WriteLine("Enter Weight");
+                            details.Weight = Convert.ToInt32(Console.ReadLine());
+                            break;
+                        case 3:
+                            Console.WriteLine("Enter PricePerKg");
+                            details.PricePerKg = Convert.ToInt32(Console.ReadLine());
+                            break;
+                    }
+                }
+            }
+        }
         public void WriteToJsonFile(string filePath)
         {
             var json = JsonConvert.SerializeObject(list);
