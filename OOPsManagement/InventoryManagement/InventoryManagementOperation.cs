@@ -22,48 +22,62 @@ namespace OOPsManagement.InventoryManagement
             Console.WriteLine("PulsesList:");
             Display(list.PulsesList);
         }
-        public void AddInventoryManagement(string objectName, string filePath)
+        public void AddInventoryManagement(string objectName)
         {
-            Console.WriteLine("Enter the name, weight and price per kg to be added:");
+            InventoryDetails details = new InventoryDetails()
             {
-                if (objectName.ToLower().Equals("rice"))
-                {
-                    var json = File.ReadAllText(filePath);
-                    list = JsonConvert.DeserializeObject<InventoryManagementDetails>(json);
-                    InventoryDetails details = new InventoryDetails()
-                    {
-                        Name = Console.ReadLine(),
-                        Weight = Convert.ToInt32(Console.ReadLine()),
-                        PricePerKg = Convert.ToInt32(Console.ReadLine())
-                    };
-                    list.RiceList.Add(details);
-                }
-                if (objectName.ToLower().Equals("wheat"))
-                {
-                    var json = File.ReadAllText(filePath);
-                    list = JsonConvert.DeserializeObject<InventoryManagementDetails>(json);
-                    InventoryDetails details = new InventoryDetails()
-                    {
-                        Name = Console.ReadLine(),
-                        Weight = Convert.ToInt32(Console.ReadLine()),
-                        PricePerKg = Convert.ToInt32(Console.ReadLine())
-                    };
-                    list.WheatList.Add(details);
-                }
-                if (objectName.ToLower().Equals("pulses"))
-                {
-                    var json = File.ReadAllText(filePath);
-                    list = JsonConvert.DeserializeObject<InventoryManagementDetails>(json);
-                    InventoryDetails details = new InventoryDetails()
-                    {
-                        Name = Console.ReadLine(),
-                        Weight = Convert.ToInt32(Console.ReadLine()),
-                        PricePerKg = Convert.ToInt32(Console.ReadLine())
-                    };
-                    list.PulsesList.Add(details);
-                }
-
+                Name = Console.ReadLine(),
+                Weight = Convert.ToInt32(Console.ReadLine()),
+                PricePerKg = Convert.ToInt32(Console.ReadLine())
+            };
+            if (objectName.ToLower().Equals("rice"))
+            {
+                list.RiceList.Add(details);
             }
+            if (objectName.ToLower().Equals("wheat"))
+            {
+                list.WheatList.Add(details);
+            }
+            if (objectName.ToLower().Equals("pulse"))
+            {
+                list.PulsesList.Add(details);
+            }
+        }
+        public void DeleteInventoryManagement(string objectName, string inventoryName)
+        {
+            InventoryDetails details = new InventoryDetails();
+            if (objectName.ToLower().Equals("rice"))
+            {
+                foreach (var data in list.RiceList)
+                {
+                    if (data.Name.Equals(inventoryName))
+                        details = data;
+                }
+                if (details != null)
+                    list.RiceList.Remove(details);
+            }
+            if (objectName.ToLower().Equals("wheat"))
+            {
+                foreach (var data in list.WheatList)
+                {
+                    if (data.Name.Equals(inventoryName))
+                        details = data;
+                }
+                if (details != null)
+                    list.WheatList.Remove(details);
+            }
+            if (objectName.ToLower().Equals("pulses"))
+            {
+                foreach (var data in list.PulsesList)
+                {
+                    if (data.Name.Equals(inventoryName))
+                        details = data;
+                }
+                if (details != null)
+                    list.PulsesList.Remove(details);
+            }
+            if (details == null)
+                Console.WriteLine("No inventory details exist");
         }
         public void WriteToJsonFile(string filePath)
         {

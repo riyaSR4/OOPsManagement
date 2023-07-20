@@ -1,6 +1,7 @@
 ﻿using OOPsManagement.DataInventoryManagement;
 using OOPsManagement.InventoryManagement;
 using System;
+using System.Security.AccessControl;
 
 namespace OOPsManagement
 {
@@ -23,11 +24,12 @@ namespace OOPsManagement
                         break;
                     case 2:
                         bool flag1 = true;
+                        InventoryManagementOperation managementOperation = new InventoryManagementOperation();
                         while (flag1)
                         {
-                            Console.WriteLine("Enter the option to proceed\n 1.Display the list\n 2.Add to list\n 3.Exit");
+                            Console.WriteLine("Enter the option to proceed\n 1.Read Inventory\n 2.Add to list\n " +
+                                "3.Delete from the list\n 4.Write to Json\n 5.Exit");
                             int option1 = Convert.ToInt32(Console.ReadLine());
-                            InventoryManagementOperation managementOperation = new InventoryManagementOperation();
                             switch (option1)
                             {
                                 case 1:
@@ -36,10 +38,19 @@ namespace OOPsManagement
                                 case 2:
                                     Console.WriteLine("Enter the name to be added:");
                                     string name = Console.ReadLine();
-                                    managementOperation.AddInventoryManagement(name, InventoryManagement_filePath);
+                                    managementOperation.AddInventoryManagement(name);
+                                    break;
+                                    case 3:
+                                    Console.WriteLine("Enter the name (rice, wheat, pulses): ");
+                                    string name1 = Console.ReadLine();
+                                    Console.WriteLine("Enter the name of the item to delete: ");
+                                    string itemName = Console.ReadLine();
+                                    managementOperation.DeleteInventoryManagement(name1, itemName);
+                                    break;
+                                case 4:
                                     managementOperation.WriteToJsonFile(InventoryManagement_filePath);
                                     break;
-                                case 3:
+                                case 5:
                                     flag = false;
                                     break;
                             }
@@ -49,7 +60,8 @@ namespace OOPsManagement
                         flag1 = false;
                         break;
                     default:
-                        flag1 = false; break;
+                        flag1 = false; 
+                        break;
                 }
             }
         }
