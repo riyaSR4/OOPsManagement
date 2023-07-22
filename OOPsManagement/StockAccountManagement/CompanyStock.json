@@ -1,22 +1,32 @@
 [
   {
-    "StockName": "Amazon",
-    "NoOfShares": 100,
+    "StockName": "Pen",
+    "NoOfShares": 90,
     "SharePrice": 50
   },
   {
-    "StockName": "FlipKart",
-    "NoOfShares": 100,
+    "StockName": "Pencil",
+    "NoOfShares": 0,
     "SharePrice": 50
   },
   {
     "StockName": "Myntra",
-    "NoOfShares": 100,
+    "NoOfShares": 10,
     "SharePrice": 50
   },
   {
     "StockName": "Ajio",
-    "NoOfShares": 100,
+    "NoOfShares": 95,
+    "SharePrice": 50
+  },
+  {
+    "StockName": "Ajio",
+    "NoOfShares": 95,
+    "SharePrice": 50
+  },
+  {
+    "StockName": "Myntra",
+    "NoOfShares": 10,
     "SharePrice": 50
   }
 ]

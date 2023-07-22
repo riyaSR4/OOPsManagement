@@ -1,4 +1,5 @@
-﻿//using OOPs.StockAccountManagement;
+﻿using OOPs.StockAccountManagement;
+using OOPsManagement.CommercialDataProcessing;
 using OOPsManagement.DataInventoryManagement;
 using OOPsManagement.InventoryManagement;
 using System;
@@ -11,12 +12,14 @@ namespace OOPsManagement
         static string DataInventoryManagement_filePath = @"D:\BridgeLabs Training\OOPsManagement\OOPsManagement\DataInventoryManagement\InventoryData.json";
         static string InventoryManagement_filePath     = @"D:\BridgeLabs Training\OOPsManagement\OOPsManagement\InventoryManagement\InventoryManagementData.json";
         static string StockAccountManagement_filePath = @"D:\BridgeLabs Training\OOPsManagement\OOPsManagement\StockAccountManagement\CompanyStock.json";
+        static string CommercialDataProcessing_filePath = @"D:\BridgeLabs Training\OOPsManagement\OOPsManagement\CommercialDataProcessing\CustomerStock.json";
         public static void Main(string[] args)
         {
             bool flag = true;
             while (flag)
             {
-            Console.WriteLine("Enter the option to proceed\n 1.Data Inventory Management\n 2.Inventory Management\n 3.Stock Account Management\n 4.Exit");
+            Console.WriteLine("Enter the option to proceed\n 1.Data Inventory Management\n 2.Inventory Management\n " +
+                "3.Stock Account Management\n 4.Commercial Data Processing\n 5.Exit");
                 int option = Convert.ToInt32(Console.ReadLine());
                 switch (option)
                 {
@@ -66,14 +69,45 @@ namespace OOPsManagement
                         }
                         break;
                     case 3:
-                        //StockOperation stockOperation = new StockOperation();
-                        //stockOperation.ReadInventoryJson(StockAccountManagement_filePath);
+                        StockOperation stockOperation = new StockOperation();
+                        stockOperation.ReadInventoryJson(StockAccountManagement_filePath);
                         break;
                     case 4:
-                        flag1 = false;
+                        Console.WriteLine("Enter the amount:");
+                        int amount = Convert.ToInt32(Console.ReadLine());
+                        StockOperations stockOperationCommercial = new StockOperations(amount);
+                        stockOperationCommercial.ReadCompanyStock(StockAccountManagement_filePath);
+                        stockOperationCommercial.ReadCustomerStock(CommercialDataProcessing_filePath);
+                        bool flag2 = true;
+                        while (flag2)
+                        {
+                            Console.WriteLine("Enter the option to proceed\n 1.Buy Stock\n 2.Sell Stock\n 3.Write to files\n" +
+                                " 4.Display\n 5.Exit");
+                            int option1 = Convert.ToInt32(Console.ReadLine());
+                            switch (option1)
+                            {
+                                case 1:
+                                    stockOperationCommercial.CustomerBuyStockFromCompany();
+                                    break;
+                                case 2:
+                                    stockOperationCommercial.CustomerSellStocksToCompany();
+                                    break;
+                                case 3:
+                                    stockOperationCommercial.WriteToCompanyFile(StockAccountManagement_filePath);
+                                    stockOperationCommercial.WriteToCustomerFile(CommercialDataProcessing_filePath);
+                                    break;
+                                case 4:
+                                    stockOperationCommercial.ReadCompanyStock(StockAccountManagement_filePath);
+                                    stockOperationCommercial.ReadCustomerStock(CommercialDataProcessing_filePath);
+                                    break;
+                                case 5:
+                                    flag2 = false;
+                                    break;
+                            }
+                        }
                         break;
-                    default:
-                        flag1 = false; 
+                    case 5:
+                        flag1 = false;
                         break;
                 }
             }
